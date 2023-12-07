@@ -1,2 +1,1 @@
-# doxcollege
-an archieve for piblic docs
+## README.md
