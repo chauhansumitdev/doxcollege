@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
+
+*{
+  margin: 0px;
+  border: 0px;
+  font-family: 'Josefin Sans', sans-serif;
+  color: rgb(46, 46, 46);
+  box-sizing: border-box;
+}
+
+/*------------App---------------*/
+
+.screen{
+  width: 1500px;
+  margin: 0 auto;
+}
+
+/*---------------Header----------------*/
+
+.title{
+  margin: 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.inputField{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+}
+
+.inputField input{
+  width: 500px;
+  height: 30px;
+  border: 2px solid rgb(46, 46, 46);
+  padding: 10px;
+  margin-right: 20px;
+}
+
+.inputField button{
+  color: white;
+  width: 150px;
+  height: 30px;
+  background-color: rgb(0, 106, 255);
+}
+
+.inputField button:hover{
+  background-color: rgb(50, 136, 255);
+}
+
+.heading{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  list-style: none;
+}
+
+.heading li{
+  width: 200px;
+  margin: 10px;
+
+}
+
+/*---------------------------------*/
+
+.card{
+  border: 1px solid rgb(46, 46, 46);
+}
