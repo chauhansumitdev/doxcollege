@@ -12,14 +12,32 @@ export class DocumentController {
     res.status(201).json({ docId });
   }
 
-  static async deletePost(req: Request, res: Response, next: NextFunction) {
-    const docId = parseInt(req.params.id, 10);
-    if (isNaN(docId)) {
+  static async deleteDocument(req: AuthenticatedRequest, res: Response, next: NextFunction) {
+    const id = parseInt(req.params.id);
+    if (isNaN(id)) {
       return res.status(400).send("Invalid Document ID.");
     }
 
-    await Document.deleteDocument(docId);
-    res.sendStatus(204);
+    const { userId } = req.user;
+
+    try {
+      const owner = await Document.checkDocumentOwner(userId, id);
+      if (owner === false) {
+        return res.status(404).json({
+          error: "The document does not belongs to you."
+        });
+      }
+
+      await Document.deleteDocument(id);
+      return res.sendStatus(204);
+    } catch (error) {
+      if (error instanceof PostNotFoundError) {
+        console.log(error)
+        return res.status(404).json({
+          error: "The document does not exist in our system."
+        });
+      }
+    }
   }
 
   static async getAllDocuments(req: Request, res: Response, next: NextFunction) {
@@ -36,5 +54,39 @@ export class DocumentController {
       sortDir.toString()
     );
     res.json(docs);
+  }
+
+  static async getDocumentById(req: Request, res: Response, next: NextFunction) {
+    const id = parseInt(req.params.id);
+    const doc = await Document.getDocumentById(id);
+    if (!doc) {
+      return res.sendStatus(404);
+    }
+    res.send(doc);
+  }
+
+  static async editDocument(req: AuthenticatedRequest, res: Response, next: NextFunction) {
+    const id = parseInt(req.params.id);
+    const { title, description, price, year } = req.body;
+
+    let updates: {} = {};
+    if (title) {
+      updates["title"] = title;
+    }
+    if (description) {
+      updates["description"] = description
+    }
+    if (price) {
+      updates["price"] = price
+    }
+    if (year) {
+      updates["year"] = year
+    }
+
+    const doc = await Document.updateDocument(updates, id);
+
+    // upload documents
+
+    res.status(201).send(doc);
   }
 }

@@ -1,3 +1,4 @@
+import { QueryResultRow } from "pg";
 import client from "../config/db.js";
 
 export class PostNotFoundError extends Error {
@@ -29,6 +30,18 @@ export class Document {
     }
   }
 
+  static async checkDocumentOwner(userId: number, documentId: number): Promise<boolean> {
+    const { rows } = await client.query(`SELECT * FROM document WHERE created_by=$1`, [userId]);
+
+    if (rows.length == 0) {
+      throw new PostNotFoundError("The document does not exists.");
+    } else if (rows[0].id === documentId) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   static async addDocument(
     title: string,
     description: string,
@@ -51,27 +64,50 @@ export class Document {
     }
   }
 
+  static async updateDocument(
+    updates: {},
+    id: number
+  ): Promise<QueryResultRow> {
+
+    let updateCols: (string | number)[] = Object.keys(updates);
+
+    let cols: string;
+    for (let i = 0; i < updateCols.length; i++) {
+      if (i === 0) {
+        cols = `${updateCols[i]}=$${i + 1}`;
+      } else {
+        cols += `,${updateCols[i]}=$${i + 1}`;
+      }
+    }
+
+    updateCols = updateCols.map(col => {
+      return updates[col];
+    })
+
+    updateCols.push(id);
+    const query = `UPDATE document SET ${cols} WHERE id=$${updateCols.length} RETURNING *`;
+
+    try {
+      const { rows } = await client.query(query, updateCols);
+      return rows[0];
+    } catch (error) {
+      console.error("Error adding document:", error);
+    }
+  }
+
   static async deleteDocument(documentId: number): Promise<void> {
     try {
       if (!documentId) {
         throw new Error("Document ID is required.");
       }
 
-      await Document.removeDocument(documentId);
-      console.log(`Document with ID ${documentId} deleted successfully.`);
+      const query = `DELETE FROM document WHERE id = $1;`;
+      const values = [documentId];
+
+      await client.query(query, values);
     } catch (error) {
       console.error("Error deleting document:", error);
     }
-  }
-
-  static async removeDocument(documentId: number): Promise<void> {
-    const query = `
-      DELETE FROM document
-      WHERE id = $1;
-    `;
-    const values = [documentId];
-
-    await client.query(query, values);
   }
 
   static async getDocumentById(documentId: number): Promise<any> {
@@ -82,9 +118,6 @@ export class Document {
     const values = [documentId];
 
     const { rows } = await client.query(query, values);
-    if (rows.length === 0) {
-      throw new PostNotFoundError(`Document with ID ${documentId} not found.`);
-    }
     return rows[0];
   }
 

@@ -12,3 +12,6 @@ router.post("/user/login", UserController.login);
 router.post("/docs/upload", authorization, upload.array('files', 10), DocumentController.createNewDocument);
 
 router.get("/docs", DocumentController.getAllDocuments)
+router.get("/docs/:id", DocumentController.getDocumentById)
+router.patch("/docs/:id", authorization, DocumentController.editDocument)
+router.delete("/docs/:id", authorization, DocumentController.deleteDocument)
