@@ -4,16 +4,16 @@ import Card from "./components/Card";
 const App = () => {
   return (
     <div className="screen">
-      <Header/>
+      <Header />
       <Card
-          title="CN"
-          category="CS"
-          year={2023}
-          price={49.99}
-        />
-        
+        title="CN"
+        category="CS"
+        year={2023}
+        price={49.99}
+      />
+
     </div>
   );
 }
- 
+
 export default App;

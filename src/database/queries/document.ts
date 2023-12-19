@@ -1,5 +1,5 @@
 import { QueryResultRow } from "pg";
-import client from "../config/db.js";
+import client from "../db.js";
 
 export class PostNotFoundError extends Error {
   constructor(message: string) {
@@ -48,17 +48,17 @@ export class Document {
     year: number,
     price: number,
     created_by: number
-  ): Promise<QueryResultRow> {
+  ): Promise<number | undefined> {
     try {
       const query = `
         INSERT INTO document (title, description, year, price, created_by)
         VALUES ($1, $2, $3, $4, $5)
-        RETURNING *;
+        RETURNING id;
       `;
       const values = [title, description, year, price, created_by];
 
       const { rows } = await client.query(query, values);
-      return rows[0];
+      return rows[0].id;
     } catch (error) {
       console.error("Error adding document:", error);
     }

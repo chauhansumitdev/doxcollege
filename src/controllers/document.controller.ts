@@ -1,15 +1,27 @@
 import { Request, Response, NextFunction } from "express";
 import { Document, PostNotFoundError } from "../queries/index.js";
 import { AuthenticatedRequest } from "../middlewares/auth.js";
+import { uploadFile } from "../services/storage.js";
+import { Upload } from "../queries/upload.js";
 
 export class DocumentController {
   static async createNewDocument(req: AuthenticatedRequest, res: Response, next: NextFunction) {
+    let results = [];
+    if (req.files && Array.isArray(req.files)) {
+      const promises = req.files.map(async (file) => {
+        return await uploadFile(file, req.user.userId);
+      });
+      results = await Promise.all(promises);
+    }
+
     const { title, description, price, year } = req.body;
-    const docId = await Document.addDocument(title, description, year, price, req.user.userId);
+    const document = await Document.addDocument(title, description, year, price, req.user.userId);
 
-    // upload documents
+    for (const result of results) {
+      await Upload.addUpload(result.name, result.url, result.mimetype, document.id);
+    }
 
-    res.status(201).json({ docId });
+    res.status(201).send(document);
   }
 
   static async deleteDocument(req: AuthenticatedRequest, res: Response, next: NextFunction) {
