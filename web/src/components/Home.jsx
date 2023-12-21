@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { getAllDocuments } from '../services/apiService';
 import Card from './Card';
 
-const DocumentList = () => {
+const Home = () => {
   const [documents, setDocuments] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -23,6 +23,13 @@ const DocumentList = () => {
 
   return (
     <div>
+      <ul className="heading">
+        <li><strong>Title</strong></li>
+        <li><strong>Description</strong></li>
+        <li><strong>Year</strong></li>
+        <li><strong>Price</strong></li>
+        <li><strong>Buy</strong></li>
+        </ul>
       {loading ? (
         <p>Loading...</p>
       ) : (
@@ -43,4 +50,4 @@ const DocumentList = () => {
   );
 };
 
-export default DocumentList;
+export default Home;
