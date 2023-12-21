@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { getAllDocuments } from '../services/apiService';
-import Card from './Card'; 
+import Card from './Card';
 
 const DocumentList = () => {
   const [documents, setDocuments] = useState([]);

@@ -1,13 +1,8 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'http://localhost:8080/api'; 
-
 const apiService = axios.create({
-  baseURL: API_BASE_URL,
+  baseURL: import.meta.env.VITE_SERVER,
 });
-
-
-
 
 export const registerUser = (userData) => apiService.post('/user/register', userData);
 export const loginUser = (userData) => apiService.post('/user/login', userData);
