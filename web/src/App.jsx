@@ -1,17 +1,11 @@
 import Header from "./components/Header";
-import Card from "./components/Card";
+import DocumentList from "./components/DocumentList";
 
 const App = () => {
   return (
     <div className="screen">
       <Header />
-      <Card
-        title="CN"
-        category="CS"
-        year={2023}
-        price={49.99}
-      />
-
+      <DocumentList/>
     </div>
   );
 }

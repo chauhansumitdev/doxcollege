@@ -8,6 +8,10 @@
   box-sizing: border-box;
 }
 
+li{
+  list-style-type: none;
+}
+
 /*------------App---------------*/
 
 .screen{
@@ -59,6 +63,7 @@
 }
 
 .heading li{
+  list-style-type: none;
   width: 200px;
   margin: 10px;
 
