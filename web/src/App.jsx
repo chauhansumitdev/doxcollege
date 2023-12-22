@@ -1,11 +1,12 @@
 import Header from "./components/Header";
-import DocumentList from "./components/DocumentList";
+import AppRoutes from '../src/router/routesConfig';
+
 
 const App = () => {
   return (
     <div className="screen">
       <Header />
-      <DocumentList/>
+      <AppRoutes/>
     </div>
   );
 }
