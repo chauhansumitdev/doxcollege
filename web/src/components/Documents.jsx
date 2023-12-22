@@ -33,13 +33,13 @@ export default function Documents() {
 
             <div className="document-list list">
               {documents.map((document) => (
-                <p key={document.id}>
+                <div key={document.id}>
                   <Document
                     title={document.title}
                     year={document.year}
                     price={document.price}
                   />
-                </p>
+                </div>
               ))}
             </div>
           </>
