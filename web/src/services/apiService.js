@@ -5,7 +5,7 @@ const apiService = axios.create({
 });
 
 export const registerUser = (userData) => apiService.post('/user/register', userData);
-export const loginUser = (userData) => apiService.post('/user/login', userData);
+export const loginUser = (userData) => apiService.post('/user/login', userData,);
 
 export const uploadDocument = (formData, config) => apiService.post('/docs/upload', formData, config);
 export const getAllDocuments = () => apiService.get('/docs');
