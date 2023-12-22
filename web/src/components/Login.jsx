@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { loginUser } from '../services/apiService';
+import { useNavigate } from 'react-router-dom';
+
 
 const Login = () => {
+
+  const [message, setMessage] = useState('');
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -20,11 +25,15 @@ const Login = () => {
       if (response.status === 201) {
         const { token } = response.data;
         setToken(token);
-        console.log("success");
+        setMessage('Login Success! Redirecting to home page');
+        setTimeout(() => {  // dummy timer just for testing purposes...
+          navigate('/');
+        }, 2000);
       } else {
-        console.error('Login failed');
+        setMessage('Email or password is wrong, please try again.');
       }
     } catch (error) {
+      setMessage('User not found, register to create a new account.');
       console.error('Error during login:', error);
     }
   };
@@ -40,6 +49,8 @@ const Login = () => {
   return (
     <div>
       <h2>Login</h2>
+      <br />
+      {message && <p>{message}</p>}
       <form onSubmit={handleLogin}>
         <label>Email:</label>
         <input type="email" name="email" value={email} onChange={handleInputChange} />
