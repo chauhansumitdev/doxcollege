@@ -1,0 +1,54 @@
+.search-container .search-bar {
+  width: 400px;
+  outline: none;
+  border: 2px solid rgb(0, 0, 0);
+  padding: 10px;
+}
+
+.navigations {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgb(173, 85, 255);
+  padding: 10px 10px;
+}
+.navigations .nav-menus .nav-item {
+  margin: 0 20px;
+  text-decoration: none;
+}
+.navigations .nav-menus .dxc {
+  color: white;
+  font-weight: bolder;
+  font-size: 1.5em;
+}
+
+.documents-container .document-list-title {
+  display: grid;
+  grid-template-columns: 60% 10% 10% auto;
+  padding: 10px 30px 5px 30px;
+  border-bottom: 2px solid black;
+  background-color: gainsboro;
+  align-items: center;
+}
+.documents-container .document-list-title .title-item {
+  font-weight: bold;
+  font-size: 1.3em;
+}
+.document {
+  display: grid;
+  grid-template-columns: 60% 10% 10% auto;
+  padding: 10px 30px;
+  align-items: center;
+  border-bottom: 1px solid gainsboro;
+}
+.document p {
+  font-size: 1.3em;
+  font-weight: lighter;
+}
+
+.document:hover {
+  background-color: gainsboro;
+  cursor: pointer;
+  border-top: 1px solid rgb(176, 176, 176);
+  border-bottom: 1px solid rgb(176, 176, 176);
+}/*# sourceMappingURL=style.css.map */

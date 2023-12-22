@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 const Loginsignup = () => {
   const [username, setUsername] = useState('');
@@ -70,7 +70,7 @@ const Loginsignup = () => {
       <br />
       <h3>Signup</h3>
       <form onSubmit={handleRegisterSubmit}>
-      <div>
+        <div>
           <label htmlFor="register-username">Username:</label>
           <input
             type="text"

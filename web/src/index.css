@@ -6,46 +6,11 @@
   font-family: 'Josefin Sans', sans-serif;
   color: rgb(46, 46, 46);
   box-sizing: border-box;
+  font-size: 16px;
 }
 
 li{
   list-style-type: none;
-}
-
-/*------------App---------------*/
-
-.screen{
-  width: 1500px;
-  margin: 0 auto;
-}
-
-/*---------------Header----------------*/
-
-.title{
-  margin: 20px 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.inputField {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  margin: 10px;
-}
-
-.inputField > * {
-  margin: 10px 10px; /* Adjust the value as needed */
-}
-
-input{
-  width: 500px;
-  height: 30px;
-  border: 2px solid rgb(46, 46, 46);
-  padding: 10px;
-  margin-right: 20px;
 }
 
 button{
@@ -58,24 +23,4 @@ button{
 
 button:hover{
   background-color: rgb(50, 136, 255);
-}
-
-.heading{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  list-style: none;
-}
-
-.heading li{
-  list-style-type: none;
-  width: 200px;
-  margin: 10px;
-
-}
-
-/*---------------------------------*/
-
-.card{
-  border: 1px solid rgb(46, 46, 46);
 }

@@ -1,12 +1,12 @@
-import Header from "./components/Header";
+import Navigation from "./components/Navigation";
 import AppRoutes from '../src/router/routesConfig';
 
 
 const App = () => {
   return (
     <div className="screen">
-      <Header />
-      <AppRoutes/>
+      <Navigation />
+      <AppRoutes />
     </div>
   );
 }
