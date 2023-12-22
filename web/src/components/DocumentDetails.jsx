@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getDocumentById } from '../services/apiService';
+import { FaCartPlus } from "react-icons/fa";
 
 const DocumentDetails = () => {
   const { id } = useParams();
@@ -42,6 +43,7 @@ const DocumentDetails = () => {
           <p>Description : {documentDetails.description}</p>
           <p>Year: {documentDetails.year}</p>
           <p>Price: {documentDetails.price}</p>
+          <button><FaCartPlus/></button>
         </>
       )}
     </div>
