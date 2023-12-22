@@ -42,7 +42,7 @@ const DocumentDetails = () => {
           <p>Title: {documentDetails.title}</p>
           <p>Description : {documentDetails.description}</p>
           <p>Year: {documentDetails.year}</p>
-          <p>Price: {documentDetails.price}</p>
+          <p>Price: {documentDetails.price}Rs</p>
           <button><FaCartPlus/></button>
         </>
       )}
