@@ -8,6 +8,8 @@ import { PoolClient } from "pg";
 import { Tables } from "./controllers/createTables.js";
 import morgan from "morgan";
 import { errorMiddleware } from "./middlewares/index.js";
+import path from 'path';
+import fs from 'fs';
 
 const app: Express = express();
 const port: string | number = process.env.PORT || 8080;
@@ -73,4 +75,13 @@ function startServer() {
     }
     console.log(`Server is running at ${url}\n`);
   });
+}
+
+try {
+  const folderName = path.join(process.cwd(), "/uploads");
+  if (!fs.existsSync(folderName)) {
+    fs.mkdirSync(folderName);
+  }
+} catch (error) {
+  console.log(error);
 }
